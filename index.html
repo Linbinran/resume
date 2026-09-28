@@ -1,0 +1,3498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="张儒翰｜同济大学｜光电信息科学与工程 & 应用物理｜AI / 编程 / 科技" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>张儒翰 · AI / 光电 / 科技</title>
+
+  <style>
+    /* =========================================================
+       Design System
+    ========================================================= */
+    :root {
+      --bg: #edf5f8;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-solid: #ffffff;
+      --surface-soft: #e5f2f6;
+      --text: #111827;
+      --text-2: #4b5563;
+      --text-3: #8a94a6;
+      --border: rgba(15, 23, 42, 0.08);
+
+      --primary: #075985;
+      --primary-2: #0e7490;
+      --primary-soft: rgba(7, 89, 133, 0.1);
+      --accent: #22d3ee;
+
+      --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.09);
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+
+      --max-width: 1180px;
+      --transition: 200ms ease;
+    }
+
+    [data-theme="dark"] {
+      --bg: #03131d;
+      --surface: rgba(5, 29, 43, 0.82);
+      --surface-solid: #071d2a;
+      --surface-soft: #0b2a3a;
+      --text: #f3f5f9;
+      --text-2: #aab3c4;
+      --text-3: #6f7a8f;
+      --border: rgba(255, 255, 255, 0.09);
+
+      --primary: #38bdf8;
+      --primary-2: #22d3ee;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --accent: #67e8f9;
+
+      --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 18px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(14, 116, 144, 0.14), transparent 28rem),
+        radial-gradient(circle at 90% 8%, rgba(34, 211, 238, 0.08), transparent 30rem),
+        var(--bg);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        "Noto Sans CJK SC",
+        Arial,
+        sans-serif;
+      line-height: 1.7;
+      transition: background 200ms ease, color 200ms ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(100, 116, 139, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.035) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       Header
+    ========================================================= */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 8px 20px rgba(49, 94, 251, 0.25);
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-links a {
+      color: var(--text-2);
+      padding: 7px 11px;
+      border-radius: 9px;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text-2);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      color: var(--primary);
+      border-color: rgba(49, 94, 251, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       Hero
+    ========================================================= */
+    main {
+      padding-top: 72px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 610px;
+      display: grid;
+      grid-template-columns: 1.45fr 0.75fr;
+      align-items: center;
+      gap: 70px;
+      padding: 82px 0 70px;
+      isolation: isolate;
+    }
+
+    /* Three.js particle background canvas — required geometry per spec */
+    #fx-canvas {
+      position: absolute;
+      inset: 0;
+      height: 320px;
+      z-index: -1;
+      pointer-events: none;
+      width: 100%;
+      display: block;
+      background: transparent;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      border: 1px solid rgba(49, 94, 251, 0.15);
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #20b26b;
+      box-shadow: 0 0 0 4px rgba(32, 178, 107, 0.12);
+    }
+
+    .hero h1 {
+      margin: 18px 0 8px;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      font-weight: 850;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: 14px;
+      font-size: clamp(19px, 2.2vw, 27px);
+      line-height: 1.35;
+      letter-spacing: -0.03em;
+      font-weight: 650;
+      color: var(--text-2);
+    }
+
+    .hero-description {
+      max-width: 690px;
+      margin: 25px 0;
+      color: var(--text-2);
+      font-size: 16px;
+    }
+
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 24px 0 30px;
+    }
+
+    .keyword {
+      padding: 6px 11px;
+      border-radius: 8px;
+      color: var(--text-2);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 43px;
+      padding: 0 16px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 25px rgba(49, 94, 251, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(49, 94, 251, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(49, 94, 251, 0.25);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .profile-card {
+      position: relative;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      top: -90px;
+      right: -70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      opacity: 0.13;
+      filter: blur(4px);
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      color: white;
+      font-size: 29px;
+      font-weight: 850;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 18px 35px rgba(49, 94, 251, 0.25);
+    }
+
+    .profile-card h2 {
+      margin: 21px 0 3px;
+      font-size: 25px;
+      letter-spacing: -0.04em;
+    }
+
+    .profile-card .role {
+      color: var(--text-2);
+      font-size: 13px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-2);
+      font-size: 12px;
+      min-width: 0;
+    }
+
+    .contact-icon {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .contact-item span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       Section
+    ========================================================= */
+    section {
+      padding: 72px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      margin: 0 0 5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 39px);
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+    }
+
+    .section-desc {
+      max-width: 520px;
+      margin: 7px 0 0;
+      color: var(--text-2);
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       Highlights
+    ========================================================= */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .highlight-card {
+      position: relative;
+      padding: 22px;
+      min-height: 145px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .highlight-card::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      right: -35px;
+      bottom: -35px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+    }
+
+    .highlight-value {
+      font-size: 28px;
+      font-weight: 850;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--primary);
+    }
+
+    .highlight-title {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .highlight-text {
+      margin-top: 3px;
+      color: var(--text-2);
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       Tabs
+    ========================================================= */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      width: fit-content;
+      max-width: 100%;
+      padding: 4px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--text-2);
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .tab:hover {
+      color: var(--primary);
+    }
+
+    .tab[aria-selected="true"] {
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 220ms ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* =========================================================
+       Experience
+    ========================================================= */
+    .experience-card {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 28px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .experience-meta {
+      color: var(--text-3);
+      font-size: 12px;
+    }
+
+    .experience-meta strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .experience-main h3 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .experience-role {
+      margin-top: 2px;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 19px 0 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--text-2);
+      font-size: 13px;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 4px var(--primary-soft);
+    }
+
+    .pending {
+      display: grid;
+      place-items: center;
+      min-height: 190px;
+      border: 1px dashed rgba(49, 94, 251, 0.24);
+      border-radius: var(--radius-md);
+      color: var(--text-3);
+      background: var(--primary-soft);
+      text-align: center;
+    }
+
+    .pending strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-2);
+    }
+
+    /* =========================================================
+       Projects
+    ========================================================= */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .project-card {
+      position: relative;
+      padding: 23px;
+      min-height: 300px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: var(--text-3);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .project-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 12px;
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .project-subtitle {
+      margin-top: 3px;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .project-card p {
+      color: var(--text-2);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 17px;
+    }
+
+    .tech {
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: var(--text-2);
+      background: var(--surface-soft);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       Skills
+    ========================================================= */
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .skill-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 20px;
+      font-size: 15px;
+    }
+
+    .skill-row {
+      margin-bottom: 17px;
+    }
+
+    .skill-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+      font-size: 11px;
+      color: var(--text-2);
+    }
+
+    .skill-head strong {
+      color: var(--text);
+    }
+
+    .progress {
+      height: 6px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--surface-soft);
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: var(--value);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      animation: progressIn 800ms ease both;
+      transform-origin: left;
+    }
+
+    .badge-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-badge {
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text-2);
+      background: var(--surface-solid);
+      font-size: 11px;
+      font-weight: 650;
+      transition: var(--transition);
+    }
+
+    .skill-badge:hover {
+      color: var(--primary);
+      border-color: rgba(49, 94, 251, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       Portfolio (AI 编程实战 + PPT 作品展示)
+    ========================================================= */
+    .portfolio-block {
+      margin-bottom: 44px;
+    }
+
+    .portfolio-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .portfolio-block-title {
+      margin: 0 0 16px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* --- AI 编程实战: cover button with dark overlay --- */
+    .ai-project-cover {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      min-height: 220px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      background: #05070a;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .ai-project-cover:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    /* Upload the AI project cover image here — replace the src below */
+    .ai-project-cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 500ms ease;
+    }
+
+    .ai-project-cover:hover img {
+      transform: scale(1.03);
+    }
+
+    .ai-project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.58);
+      transition: background 300ms ease;
+    }
+
+    .ai-project-cover:hover .ai-project-overlay {
+      background: rgba(0, 0, 0, 0.66);
+    }
+
+    .ai-project-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .ai-project-title {
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .ai-project-sub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 750;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      letter-spacing: 0.02em;
+    }
+
+    /* --- PPT 作品展示: horizontal sliding stacked-card carousel --- */
+    .ppt-carousel {
+      display: grid;
+      gap: 20px;
+    }
+
+    .ppt-stage {
+      position: relative;
+      height: 380px;
+      overflow: hidden;
+    }
+
+    .ppt-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Upload the PPT slide screenshots via the pptImages array in JS —
+       cards are generated dynamically, this class styles each one */
+    .ppt-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(620px, 72%);
+      height: 340px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      background: var(--surface-solid);
+      transition:
+        transform 520ms cubic-bezier(0.22, 0.8, 0.32, 1),
+        opacity 520ms ease,
+        filter 520ms ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .ppt-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .ppt-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .ppt-line {
+      flex: 1;
+      max-width: 260px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .ppt-arrow {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      cursor: pointer;
+      font-size: 18px;
+      display: grid;
+      place-items: center;
+      transition: var(--transition);
+    }
+
+    .ppt-arrow:hover {
+      color: var(--primary);
+      border-color: rgba(34, 211, 238, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* --- MusicGuessr modal (reuses .cert-modal dark backdrop system) --- */
+    .mg-modal-dialog {
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .mg-modal-url {
+      margin: 14px 0 6px;
+      word-break: break-all;
+      font-size: 15px;
+    }
+
+    .mg-modal-url a {
+      color: var(--primary);
+      font-weight: 750;
+    }
+
+    .mg-modal-tip {
+      margin: 0;
+      color: #aab3c4;
+      font-size: 12px;
+    }
+
+    @media (max-width: 680px) {
+      .ppt-stage {
+        height: 260px;
+      }
+
+      .ppt-card {
+        width: min(320px, 82%);
+        height: 240px;
+      }
+
+      .ai-project-cover {
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    /* =========================================================
+       Education & Certifications
+    ========================================================= */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 15px;
+    }
+
+    .edu-card,
+    .cert-card {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .edu-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edu-card::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -100px;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+    }
+
+    .school {
+      display: flex;
+      align-items: start;
+      gap: 15px;
+    }
+
+    .school-mark {
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      font-weight: 850;
+    }
+
+    .school h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .degree {
+      margin-top: 3px;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .edu-year {
+      margin-top: 3px;
+      color: var(--text-3);
+      font-size: 11px;
+    }
+
+    .edu-points {
+      margin-top: 21px;
+    }
+
+    .cert-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .cert-item {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cert-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .cert-item strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .cert-item span {
+      display: block;
+      margin-top: 2px;
+      color: var(--text-2);
+      font-size: 11px;
+    }
+
+    .score {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: var(--primary);
+      background: var(--primary-soft);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       Strengths
+    ========================================================= */
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .strength {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .strength-index {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .strength h3 {
+      margin: 9px 0 5px;
+      font-size: 15px;
+    }
+
+    .strength p {
+      margin: 0;
+      color: var(--text-2);
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       Footer
+    ========================================================= */
+    footer {
+      margin-top: 30px;
+      padding: 32px 0 45px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--text-3);
+      font-size: 11px;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 900;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text-2);
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       Animations
+    ========================================================= */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes progressIn {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* =========================================================
+       Deep Sea Future-Tech Enhancements
+    ========================================================= */
+    .tech-section,
+    #highlights,
+    #projects,
+    #skills,
+    #experience,
+    #contact {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .tech-section::before,
+    #highlights::before,
+    #projects::before,
+    #skills::before,
+    #experience::before,
+    #contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .34;
+      background-image:
+        linear-gradient(90deg, transparent 49.7%, rgba(34,211,238,.06) 50%, transparent 50.3%),
+        linear-gradient(rgba(34,211,238,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,211,238,.045) 1px, transparent 1px);
+      background-size: 100% 100%, 42px 42px, 42px 42px;
+      mask-image: linear-gradient(to bottom, transparent, black 16%, black 84%, transparent);
+    }
+
+    .site-header {
+      border-bottom-color: rgba(34,211,238,.16);
+      box-shadow: 0 0 24px rgba(8,145,178,.08);
+    }
+
+    .brand-mark,
+    .btn-primary,
+    .avatar {
+      background: linear-gradient(135deg, #075985, #0e7490 58%, #22d3ee);
+    }
+
+    .profile-card {
+      border-color: rgba(34,211,238,.15);
+    }
+
+    .photo-avatar {
+      overflow: hidden;
+      padding: 0;
+      background: var(--surface-soft);
+      border: 1px solid rgba(34,211,238,.24);
+    }
+
+    .photo-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .92;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .achievement-card {
+      position: relative;
+      min-height: 365px;
+      padding: 25px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(145deg, rgba(8,72,97,.05), transparent 45%),
+        var(--surface);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34,211,238,.28);
+      box-shadow: 0 18px 55px rgba(8,145,178,.12);
+    }
+
+    .achievement-icon {
+      position: relative;
+      z-index: 2;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border: 1px solid rgba(34,211,238,.25);
+      border-radius: 13px;
+      color: #67e8f9;
+      background: rgba(8,47,73,.12);
+      box-shadow: inset 0 0 18px rgba(34,211,238,.07), 0 0 18px rgba(34,211,238,.06);
+      font-weight: 850;
+    }
+
+    .achievement-label {
+      position: relative;
+      z-index: 2;
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .achievement-card h3 {
+      position: relative;
+      z-index: 2;
+      margin: 8px 0 5px;
+      font-size: 20px;
+      letter-spacing: -.04em;
+    }
+
+    .achievement-school,
+    .cert-caption,
+    .achievement-desc {
+      position: relative;
+      z-index: 2;
+      color: var(--text-2);
+      font-size: 12px;
+    }
+
+    .cert-mini-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 16px 0 9px;
+    }
+
+    .cert-mini-grid img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+      border: 1px solid rgba(34,211,238,.2);
+      background: #071d2a;
+      cursor: pointer;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .cert-mini-grid img:hover {
+      transform: scale(1.025);
+      filter: brightness(1.08);
+    }
+
+    .cert-view-btn {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      margin-top: 16px;
+      min-height: 47px;
+      letter-spacing: .02em;
+      box-shadow: 0 0 26px rgba(34,211,238,.13);
+    }
+
+    .ielts-score {
+      position: relative;
+      z-index: 2;
+      margin-top: 14px;
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.07em;
+      color: #38bdf8;
+      text-shadow: 0 0 24px rgba(56,189,248,.22);
+    }
+
+    .ielts-name {
+      position: relative;
+      z-index: 2;
+      margin-top: 5px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .signal-bars {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: end;
+      gap: 5px;
+      height: 52px;
+      margin-top: 22px;
+    }
+
+    .signal-bars span {
+      display: block;
+      width: 8px;
+      border-radius: 3px;
+      background: linear-gradient(to top, var(--primary), var(--accent));
+      box-shadow: 0 0 10px rgba(34,211,238,.22);
+    }
+    .signal-bars span:nth-child(1){height:22%}
+    .signal-bars span:nth-child(2){height:44%}
+    .signal-bars span:nth-child(3){height:62%}
+    .signal-bars span:nth-child(4){height:82%}
+    .signal-bars span:nth-child(5){height:100%}
+
+    .tech-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: .34;
+      z-index: 1;
+    }
+
+    .circuit-deco {
+      inset: -30px -20px auto auto;
+      width: 290px;
+      height: 210px;
+      background:
+        radial-gradient(circle at 24% 22%, rgba(34,211,238,.32) 0 2px, transparent 3px),
+        linear-gradient(90deg, transparent 0 14%, rgba(34,211,238,.16) 14.5% 15%, transparent 15.5% 37%, rgba(34,211,238,.13) 37.5% 38%, transparent 38.5%),
+        linear-gradient(0deg, transparent 0 28%, rgba(34,211,238,.14) 28.5% 29%, transparent 29.5% 58%, rgba(34,211,238,.12) 58.5% 59%, transparent 59.5%);
+      mask-image: linear-gradient(135deg, black, transparent 78%);
+    }
+
+    .chip-deco {
+      top: -35px;
+      right: -35px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(34,211,238,.2);
+      border-radius: 28px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 17px, rgba(34,211,238,.11) 18px 19px),
+        repeating-linear-gradient(0deg, transparent 0 17px, rgba(34,211,238,.11) 18px 19px);
+      transform: rotate(10deg);
+    }
+
+    .chip-deco::before,
+    .chip-deco::after {
+      content: "";
+      position: absolute;
+      inset: 36px;
+      border: 1px solid rgba(34,211,238,.2);
+      border-radius: 16px;
+    }
+
+    .chip-deco::after {
+      inset: 62px;
+      border-color: rgba(103,232,249,.28);
+    }
+
+    .wave-deco {
+      right: -20px;
+      bottom: -25px;
+      width: 310px;
+      height: 160px;
+      border-radius: 50%;
+      border-top: 1px solid rgba(34,211,238,.24);
+      box-shadow: 0 -22px 0 -1px rgba(34,211,238,.12), 0 -44px 0 -1px rgba(34,211,238,.08);
+      transform: rotate(-8deg);
+    }
+
+    .progress-tech {
+      --p: var(--value);
+      position: relative;
+      height: 22px;
+      border: 1px solid rgba(34,211,238,.2);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(7,47,63,.1);
+      box-shadow: inset 0 0 14px rgba(34,211,238,.05);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%, 7px 50%);
+    }
+
+    .progress-grid-lines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent 0 22px, rgba(103,232,249,.09) 22px 23px);
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 3px auto 3px 3px;
+      width: calc(var(--p) - 6px);
+      min-width: 4px;
+      border-radius: 3px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 2px, transparent 2px 8px),
+        linear-gradient(90deg, #075985, #0e7490 65%, #67e8f9);
+      box-shadow: 0 0 15px rgba(34,211,238,.3);
+      animation: techProgressIn 900ms cubic-bezier(.2,.8,.2,1) both;
+      transform-origin: left;
+    }
+
+    .progress-fill i {
+      position: absolute;
+      top: -3px;
+      right: 0;
+      width: 3px;
+      height: calc(100% + 6px);
+      background: #a5f3fc;
+      box-shadow: 0 0 12px #67e8f9;
+    }
+
+    .progress-node {
+      position: absolute;
+      top: 50%;
+      left: var(--p);
+      width: 9px;
+      height: 9px;
+      border: 2px solid #a5f3fc;
+      border-radius: 50%;
+      background: #075985;
+      box-shadow: 0 0 0 3px rgba(34,211,238,.1), 0 0 13px rgba(34,211,238,.7);
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes techProgressIn {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .cert-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .cert-modal.open { display: flex; }
+
+    .cert-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(1,12,20,.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .cert-modal-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(1050px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 28px;
+      border: 1px solid rgba(34,211,238,.25);
+      border-radius: 22px;
+      background: rgba(5,29,43,.96);
+      box-shadow: 0 25px 90px rgba(0,0,0,.45), 0 0 40px rgba(34,211,238,.08);
+    }
+
+    .cert-modal-dialog h2 {
+      margin: 0 0 20px;
+      font-size: 30px;
+      color: #f3f5f9;
+    }
+
+    .cert-modal-close {
+      position: absolute;
+      top: 15px;
+      right: 16px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-2);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .cert-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cert-gallery figure {
+      margin: 0;
+      padding: 10px;
+      border: 1px solid rgba(34,211,238,.16);
+      border-radius: 14px;
+      background: rgba(2,20,30,.55);
+    }
+
+    .cert-gallery img {
+      width: 100%;
+      display: block;
+      border-radius: 9px;
+    }
+
+    .cert-gallery figcaption {
+      padding: 9px 2px 2px;
+      color: var(--text-2);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    /* =========================================================
+       Responsive
+    ========================================================= */
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        min-height: auto;
+      }
+
+      .profile-card {
+        max-width: 520px;
+      }
+
+      .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .achievement-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .site-header {
+        height: 62px;
+      }
+
+      main {
+        padding-top: 62px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .hero {
+        padding: 55px 0 45px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero h1 span {
+        font-size: 18px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .highlight-grid,
+      .project-grid,
+      .strength-grid,
+      .skills-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .profile-card {
+        padding: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .back-top {
+        right: 15px;
+        bottom: 15px;
+      }
+
+      .cert-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .achievement-card {
+        min-height: auto;
+      }
+
+      .cert-mini-grid img {
+        height: 135px;
+      }
+
+      .cert-modal {
+        padding: 12px;
+      }
+
+      .cert-modal-dialog {
+        padding: 22px 16px;
+      }
+    }
+
+    /* =========================================================
+       Print
+    ========================================================= */
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --surface-solid: #ffffff;
+        --text: #111827;
+        --text-2: #374151;
+        --text-3: #6b7280;
+        --border: #e5e7eb;
+      }
+
+      body {
+        background: white !important;
+        color: #111827 !important;
+        font-size: 10px;
+      }
+
+      body::before,
+      .site-header,
+      .back-top,
+      .hero-actions,
+      .tabs,
+      .nav-actions,
+      #fx-canvas {
+        display: none !important;
+      }
+
+      main {
+        padding-top: 0;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1.5fr 0.8fr;
+        gap: 30px;
+        padding: 0 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero h1 span {
+        font-size: 15px;
+      }
+
+      .hero-description {
+        margin: 12px 0;
+        font-size: 10px;
+      }
+
+      .profile-card {
+        box-shadow: none;
+        animation: none;
+      }
+
+      section {
+        padding: 20px 0;
+        break-inside: avoid;
+      }
+
+      .section-title {
+        font-size: 23px;
+      }
+
+      .highlight-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .highlight-card,
+      .project-card,
+      .skill-card,
+      .edu-card,
+      .cert-card,
+      .strength,
+      .experience-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .skills-layout,
+      .edu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .achievement-grid { grid-template-columns: repeat(3, 1fr); }
+      .achievement-card { min-height: 280px; }
+      .cert-mini-grid img { height: 80px; }
+      .cert-view-btn,
+      .cert-modal { display: none !important; }
+      .ppt-controls,
+      .ppt-track { display: none !important; }
+      .progress-tech { height: 15px; }
+
+
+      .strength-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .tab-panel {
+        display: block !important;
+      }
+
+      .tab-panel:not(#work-panel)::before {
+        display: none;
+      }
+
+      footer {
+        margin-top: 10px;
+        padding: 15px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       Header
+  ======================================================== -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark">张</span>
+        <span>张儒翰 · Resume</span>
+      </a>
+
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#highlights">亮点</a>
+        <a href="#projects">项目</a>
+        <a href="#skills">技能</a>
+        <a href="#portfolio">作品展示</a>
+        <a href="#education">成就与证书</a>
+        <a href="#experience">经历</a>
+        <a href="#contact">联系</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          class="icon-btn"
+          id="themeBtn"
+          type="button"
+          aria-label="切换深浅色模式"
+          title="切换深浅色模式"
+        >
+          ◐
+        </button>
+
+        <button
+          class="icon-btn"
+          id="printBtn"
+          type="button"
+          aria-label="打印或保存为PDF"
+          title="打印 / 保存 PDF"
+        >
+          ⎙
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- =====================================================
+         Hero
+    ====================================================== -->
+    <section class="hero container tech-section">
+
+      <!-- Three.js particle background (native HTML/JS, no React/TSX) -->
+      <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+      <div class="reveal">
+        <div class="eyebrow">
+          <span class="status-dot"></span>
+          同济大学 · 2026 新生
+        </div>
+
+        <h1>
+          张儒翰
+          <span>光电信息科学与工程 × 应用物理<br />AI / 编程 / 科技探索</span>
+        </h1>
+
+        <p class="hero-description">
+          同济大学光电信息科学与工程与应用物理双学位学生。
+          关注人工智能、编程、光电信息与科技创新，擅长利用 AI 工具进行
+          信息检索、内容整理、方案设计与效率优化，并持续将技术学习转化为实际项目。
+        </p>
+
+        <div class="keyword-list" aria-label="核心关键词">
+          <span class="keyword">Artificial Intelligence</span>
+          <span class="keyword">Python & C Programming</span>
+          <span class="keyword">光电信息</span>
+          <span class="keyword">应用物理</span>
+          <span class="keyword">PPT / Visual Communication</span>
+          <span class="keyword">IELTS 7.0</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="copyEmailBtn">
+            ✉ 复制邮箱
+          </button>
+
+          <a class="btn btn-secondary" href="mailto:938731396@qq.com">
+            发送邮件
+          </a>
+
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/Linbinran"
+            target="_blank"
+            rel="noopener"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <aside class="profile-card reveal" aria-label="个人联系方式">
+        <div class="avatar photo-avatar"><img src="个人照.png" alt="张儒翰个人照片" /></div>
+
+        <h2>张儒翰</h2>
+        <div class="role">Tongji University · AI / Technology</div>
+
+        <div class="contact-list">
+          <a class="contact-item" href="tel:18884845229">
+            <span class="contact-icon">☎</span>
+            <span>188 8484 5229</span>
+          </a>
+
+          <div class="contact-item">
+            <span class="contact-icon">微</span>
+            <span>130 5656 8886</span>
+          </div>
+
+          <a class="contact-item" href="mailto:938731396@qq.com">
+            <span class="contact-icon">@</span>
+            <span>938731396@qq.com</span>
+          </a>
+
+          <a
+            class="contact-item"
+            href="https://github.com/Linbinran"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="contact-icon">GH</span>
+            <span>github.com/Linbinran</span>
+          </a>
+
+          <div class="contact-item">
+            <span class="contact-icon">EN</span>
+            <span>IELTS 7.0</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- =====================================================
+         Highlights
+    ====================================================== -->
+    <section id="highlights" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">At a glance</p>
+            <h2 class="section-title">30 秒看懂我的核心亮点</h2>
+          </div>
+          <p class="section-desc">
+            用最少的信息呈现教育背景、技术能力与目前的成长方向。
+          </p>
+        </div>
+
+        <div class="highlight-grid">
+          <article class="highlight-card reveal">
+            <div class="highlight-value">PPT & Excel</div>
+            <div class="highlight-title">办公软件能力</div>
+            <div class="highlight-text">信息视觉化表达与数据整理能力</div>
+          </article>
+
+          <article class="highlight-card reveal">
+            <div class="highlight-value">7.0</div>
+            <div class="highlight-title">IELTS</div>
+            <div class="highlight-text">具备英文技术资料阅读能力</div>
+          </article>
+
+          <article class="highlight-card reveal">
+            <div class="highlight-value">AI</div>
+            <div class="highlight-title">人工智能</div>
+            <div class="highlight-text">阿里云 AI 工程师高级证书</div>
+          </article>
+
+          <article class="highlight-card reveal">
+            <div class="highlight-value">Python & C</div>
+            <div class="highlight-title">编程基础</div>
+            <div class="highlight-text">持续进行程序设计与项目实践</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         Projects
+    ====================================================== -->
+    <section id="projects" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Selected Projects</p>
+            <h2 class="section-title">项目实践</h2>
+          </div>
+          <p class="section-desc">
+            目前以 AI 应用与编程实践为主，持续将学习成果转化为实际作品。
+          </p>
+        </div>
+
+        <div
+          class="tabs"
+          role="tablist"
+          aria-label="项目分类"
+        >
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="ai-projects"
+            id="ai-projects-tab"
+            data-tab-group="projects"
+            data-target="ai-projects"
+          >
+            AI / 智能化
+          </button>
+
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-projects"
+            id="code-projects-tab"
+            data-tab-group="projects"
+            data-target="code-projects"
+          >
+            编程
+          </button>
+
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="science-projects"
+            id="science-projects-tab"
+            data-tab-group="projects"
+            data-target="science-projects"
+          >
+            科技 / 光电
+          </button>
+        </div>
+
+        <div
+          class="tab-panel active"
+          id="ai-projects"
+          role="tabpanel"
+          aria-labelledby="ai-projects-tab"
+        >
+          <div class="project-grid">
+            <article class="project-card reveal">
+              <span class="project-number">01</span>
+
+              <div class="project-icon">AI</div>
+
+              <h3>AI 简历智能化工作流</h3>
+              <div class="project-subtitle">个人项目 · AI Workflow</div>
+
+              <p>
+                围绕个人简历搭建，利用生成式 AI 进行信息检索、
+                素材整理、结构优化与成果输出，探索 AI 在个人生产力场景中的实际应用。
+              </p>
+
+              <div class="tech-list">
+                <span class="tech">生成式 AI</span>
+                <span class="tech">Prompt</span>
+                <span class="tech">Workflow</span>
+                <span class="tech">Information Retrieval</span>
+              </div>
+            </article>
+
+            <article class="project-card reveal">
+              <span class="project-number">02</span>
+
+              <div class="project-icon">✦</div>
+
+              <h3>AI 辅助学习与信息处理</h3>
+              <div class="project-subtitle">持续实践 · Productivity</div>
+
+              <p>
+                将复杂任务拆分为信息采集、分析处理、内容生成与人工校验等环节，
+                探索不同 AI 工具之间的组合使用方式。
+              </p>
+
+              <div class="tech-list">
+                <span class="tech">AI Tools</span>
+                <span class="tech">提示词设计</span>
+                <span class="tech">信息检索与研究</span>
+                <span class="tech">PPT</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div
+          class="tab-panel"
+          id="code-projects"
+          role="tabpanel"
+          aria-labelledby="code-projects-tab"
+        >
+          <div class="project-grid">
+            <article class="project-card reveal">
+              <span class="project-number">01</span>
+
+              <div class="project-icon">&lt;/&gt;</div>
+
+              <h3>MusicGuessr</h3>
+              <div class="project-subtitle">Python & C语言 · 个人编程项目</div>
+
+              <p>
+                正在准备基于 Python 与 C 语言完成音乐猜测类小游戏，
+                实现用户输入、游戏逻辑、数据处理与结果输出等核心功能。
+              </p>
+
+              <div class="tech-list">
+                <span class="tech">Python</span>
+                <span class="tech">C</span>
+                <span class="tech">算法基础</span>
+                <span class="tech">Console</span>
+                <span class="tech">Game Logic</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div
+          class="tab-panel"
+          id="science-projects"
+          role="tabpanel"
+          aria-labelledby="science-projects-tab"
+        >
+          <div class="project-grid">
+            <article class="project-card reveal">
+              <span class="project-number">01</span>
+
+              <div class="project-icon">◈</div>
+
+              <h3>AI × 光电科技探索</h3>
+              <div class="project-subtitle">科技 / 光电方向</div>
+
+              <p>
+                结合生成式 AI 与光电信息科学、应用物理领域进行探索，
+                关注人工智能与传统理工学科的交叉应用。
+              </p>
+
+              <div class="tech-list">
+                <span class="tech">光电信息</span>
+                <span class="tech">Physics</span>
+                <span class="tech">AI</span>
+                <span class="tech">科技探索</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         Skills
+    ====================================================== -->
+    <section id="skills" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Capabilities</p>
+            <h2 class="section-title">技能矩阵</h2>
+          </div>
+        </div>
+
+        <div class="skills-layout">
+
+          <div class="skill-card reveal">
+            <h3>技术能力</h3>
+
+            <div class="skill-row">
+              <div class="skill-head">
+                <strong>AI 工具应用</strong>
+                <span>熟练</span>
+              </div>
+              <div class="progress-tech" style="--value:88%">
+                <span class="progress-grid-lines" aria-hidden="true"></span>
+                <span class="progress-fill"><i></i></span>
+                <span class="progress-node" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-head">
+                <strong>Python / C 编程基础</strong>
+                <span>掌握</span>
+              </div>
+              <div class="progress-tech" style="--value:68%">
+                <span class="progress-grid-lines" aria-hidden="true"></span>
+                <span class="progress-fill"><i></i></span>
+                <span class="progress-node" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-head">
+                <strong>PPT / 信息视觉化</strong>
+                <span>熟练</span>
+              </div>
+              <div class="progress-tech" style="--value:85%">
+                <span class="progress-grid-lines" aria-hidden="true"></span>
+                <span class="progress-fill"><i></i></span>
+                <span class="progress-node" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-head">
+                <strong>Excel / 数据整理</strong>
+                <span>熟练</span>
+              </div>
+              <div class="progress-tech" style="--value:86%">
+                <span class="progress-grid-lines" aria-hidden="true"></span>
+                <span class="progress-fill"><i></i></span>
+                <span class="progress-node" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <div class="skill-head">
+                <strong>物理 / 光电基础</strong>
+                <span>基础</span>
+              </div>
+              <div class="progress-tech" style="--value:72%">
+                <span class="progress-grid-lines" aria-hidden="true"></span>
+                <span class="progress-fill"><i></i></span>
+                <span class="progress-node" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3>工具 / 领域关键词</h3>
+
+            <div class="badge-cloud">
+              <span class="skill-badge">生成式 AI</span>
+              <span class="skill-badge">提示词设计</span>
+              <span class="skill-badge">AI 工作流</span>
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">C 语言</span>
+              <span class="skill-badge">算法基础</span>
+              <span class="skill-badge">PPT 制作</span>
+              <span class="skill-badge">Excel</span>
+              <span class="skill-badge">数据整理</span>
+              <span class="skill-badge">信息视觉化</span>
+              <span class="skill-badge">应用物理</span>
+              <span class="skill-badge">光电信息</span>
+              <span class="skill-badge">科技探索</span>
+              <span class="skill-badge">信息检索与研究</span>
+              <span class="skill-badge">英语能力</span>
+              <span class="skill-badge">IELTS 7.0</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         Portfolio: AI 编程实战 + PPT 作品展示
+    ====================================================== -->
+    <section id="portfolio" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Portfolio</p>
+            <h2 class="section-title">作品展示</h2>
+          </div>
+          <p class="section-desc">
+            AI 编程与 PPT 设计的实际产出，点击封面查看详情。
+          </p>
+        </div>
+
+        <!-- AI 编程实战 -->
+        <div class="portfolio-block reveal">
+          <h3 class="portfolio-block-title">AI 编程实战</h3>
+
+          <!-- 【图片上传位置 1】把 MusicGuessr 的封面图替换到下面 img 的 src 里 -->
+          <button
+            type="button"
+            class="ai-project-cover"
+            id="musicGuessrCover"
+            aria-haspopup="dialog"
+          >
+            <img src="MusicGuessr.jpg" alt="MusicGuessr 项目封面" />
+            <span class="ai-project-overlay" aria-hidden="true"></span>
+            <span class="ai-project-text">
+              <span class="ai-project-title">MusicGuessr</span>
+              <span class="ai-project-sub">▶ 立即游玩</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- PPT 作品展示 -->
+        <div class="portfolio-block reveal">
+          <h3 class="portfolio-block-title">PPT 作品展示</h3>
+
+          <div class="ppt-carousel" id="pptCarousel">
+            <div class="ppt-stage">
+              <!-- 【图片上传位置 2】PPT 截图数组在下方 JS 的 pptImages 里配置，src 在那里替换；
+                   卡片由 JS 按数组数量动态生成，插入到下面这个 .ppt-track 里 -->
+              <div class="ppt-track" id="pptTrack"></div>
+            </div>
+
+            <div class="ppt-controls">
+              <button class="ppt-arrow" id="pptPrevBtn" type="button" aria-label="上一张">‹</button>
+              <div class="ppt-line"></div>
+              <button class="ppt-arrow" id="pptNextBtn" type="button" aria-label="下一张">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MusicGuessr link viewer -->
+    <div class="cert-modal" id="musicGuessrModal" aria-hidden="true">
+      <div class="cert-modal-backdrop" data-close-mg></div>
+      <div class="cert-modal-dialog mg-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mgModalTitle">
+        <button class="cert-modal-close" id="closeMgBtn" type="button" aria-label="关闭">×</button>
+        <p class="section-kicker">AI 编程实战</p>
+        <h2 id="mgModalTitle">MusicGuessr</h2>
+        <!-- 【链接位置】把游戏网址替换到下面 href 和文字里 -->
+        <p class="mg-modal-url">
+          <a id="mgUrlLink" href="https://linbinran.github.io/MG/" target="_blank" rel="noopener">
+            https://linbinran.github.io/MG/
+          </a>
+        </p>
+        <p class="mg-modal-tip">建议复制到浏览器打开</p>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         Achievements & Certifications
+    ====================================================== -->
+    <section id="education" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Achievements & Certifications</p>
+            <h2 class="section-title">成就与证书</h2>
+          </div>
+          <p class="section-desc">
+            用三个核心模块集中呈现专业背景、AI 认证与语言能力。
+          </p>
+        </div>
+
+        <div class="achievement-grid">
+
+          <article class="achievement-card reveal">
+            <div class="tech-deco circuit-deco" aria-hidden="true"></div>
+            <div class="achievement-icon">◈</div>
+            <div class="achievement-label">01 / 专业</div>
+            <h3>光电信息科学与工程<br />× 应用物理</h3>
+            <div class="achievement-school">同济大学 · 双学位</div>
+            <div class="edu-year">2026 — 至今 · 准大一学生</div>
+            <ul class="bullet-list edu-points">
+              <li>物理、光电信息、数学与工程技术交叉学习。</li>
+              <li>持续拓展人工智能、编程与科技创新能力。</li>
+              <li>通过项目实践推动理论知识向实际应用转化。</li>
+            </ul>
+          </article>
+
+          <article class="achievement-card ai-cert-card reveal">
+            <div class="tech-deco chip-deco" aria-hidden="true"></div>
+            <div class="achievement-icon">AI</div>
+            <div class="achievement-label">02 / AI 认证</div>
+            <h3>人工智能训练与工程能力</h3>
+            <div class="cert-mini-grid">
+              <img src="award1.jpg" alt="AI训练师证书 1" loading="lazy" />
+              <img src="award2.jpg" alt="AI训练师证书 2" loading="lazy" />
+            </div>
+            <div class="cert-caption">AI 训练师 / AI 工程方向证书</div>
+            <button class="btn btn-primary cert-view-btn" id="viewCertificatesBtn" type="button">
+              ✦ 查看我的AI证书
+            </button>
+          </article>
+
+          <article class="achievement-card reveal">
+            <div class="tech-deco wave-deco" aria-hidden="true"></div>
+            <div class="achievement-icon">EN</div>
+            <div class="achievement-label">03 / 语言</div>
+            <h3>雅思语言能力</h3>
+            <div class="ielts-score">7.0</div>
+            <div class="ielts-name">IELTS 雅思</div>
+            <p class="achievement-desc">
+              具备英文技术资料阅读、国际信息检索与学术课程学习能力。
+            </p>
+            <div class="signal-bars" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AI certificate viewer -->
+    <div class="cert-modal" id="certModal" aria-hidden="true">
+      <div class="cert-modal-backdrop" data-close-cert></div>
+      <div class="cert-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+        <button class="cert-modal-close" id="closeCertBtn" type="button" aria-label="关闭证书预览">×</button>
+        <p class="section-kicker">AI CERTIFICATION</p>
+        <h2 id="certModalTitle">我的 AI 证书</h2>
+        <div class="cert-gallery">
+          <figure><img src="award1.jpg" alt="AI训练师证书 1" /><figcaption>AI 训练师证书 · 01</figcaption></figure>
+          <figure><img src="award2.jpg" alt="AI训练师证书 2" /><figcaption>AI 训练师证书 · 02</figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         Strengths
+    ====================================================== -->
+    <section>
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Why Me</p>
+            <h2 class="section-title">核心优势</h2>
+          </div>
+        </div>
+
+        <div class="strength-grid">
+
+          <article class="strength reveal">
+            <div class="strength-index">01 / CROSS-DISCIPLINE</div>
+            <h3>交叉学科背景</h3>
+            <p>
+              光电信息科学与工程 + 应用物理双学位，
+              兼具物理理论、工程技术与信息技术学习背景。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">02 / AI APPLICATION</div>
+            <h3>AI 应用能力</h3>
+            <p>
+              能够将生成式 AI 融入学习、研究、编程与内容生产，
+              探索 AI 驱动的工作流与生产力工具。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">03 / LEARNING</div>
+            <h3>快速学习</h3>
+            <p>
+              面对新工具、新技术能够快速建立知识框架，
+              并通过实际项目验证学习成果。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">04 / COMMUNICATION</div>
+            <h3>表达与展示</h3>
+            <p>
+              擅长 PPT、Excel 数据整理与视觉化表达，
+              能够将复杂内容转化为清晰、易理解的成果。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">05 / PROGRAMMING</div>
+            <h3>编程实践能力</h3>
+            <p>
+              掌握 Python 与 C 语言基础，能够独立完成小型程序设计，
+              并将编程思维应用于项目开发与问题拆解。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">06 / ENGLISH</div>
+            <h3>英文能力</h3>
+            <p>
+              IELTS 7.0，可独立阅读英文技术资料、
+              学术信息及国际化课程内容。
+            </p>
+          </article>
+
+          <article class="strength reveal">
+            <div class="strength-index">07 / FUTURE</div>
+            <h3>发展方向</h3>
+            <p>
+              人工智能、计算机技术、光电信息、科技创新、
+              互联网及交叉学科研究。
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         Experience
+    ====================================================== -->
+    <section id="experience" class="tech-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="section-kicker">Experience</p>
+            <h2 class="section-title">经历</h2>
+          </div>
+        </div>
+
+        <div
+          class="tabs"
+          role="tablist"
+          aria-label="经历分类"
+        >
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="work-panel"
+            id="work-tab"
+            data-tab-group="experience"
+            data-target="work-panel"
+          >
+            工作 / 实习
+          </button>
+
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="campus-panel"
+            id="campus-tab"
+            data-tab-group="experience"
+            data-target="campus-panel"
+          >
+            校园 / 学习
+          </button>
+        </div>
+
+        <div
+          class="tab-panel active"
+          id="work-panel"
+          role="tabpanel"
+          aria-labelledby="work-tab"
+        >
+          <div class="pending reveal">
+            <div>
+              <strong>工作 / 实习经历</strong>
+              <span>敬请期待 · 后续将持续更新</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tab-panel"
+          id="campus-panel"
+          role="tabpanel"
+          aria-labelledby="campus-tab"
+        >
+          <article class="experience-card reveal">
+            <div class="experience-meta">
+              <strong>同济大学</strong>
+              2026 — 至今
+            </div>
+
+            <div class="experience-main">
+              <h3>光电信息科学与工程 & 应用物理</h3>
+              <div class="experience-role">双学位 · 科技与交叉学科方向</div>
+
+              <ul class="bullet-list">
+                <li>
+                  以光电信息科学与工程、应用物理为核心建立交叉学科知识体系，
+                  同时拓展人工智能与计算机技术能力。
+                </li>
+                <li>
+                  持续通过 AI 工具、编程实践及数字化工具进行自主学习，
+                  将理论知识转化为可展示、可运行的项目成果。
+                </li>
+                <li>
+                  围绕 AI、光电与科技创新方向进行项目探索，为后续科研、
+                  竞赛及技术实践积累基础。
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         Contact
+    ====================================================== -->
+    <section id="contact" class="tech-section">
+      <div class="container">
+        <div
+          class="profile-card reveal"
+          style="display:flex;align-items:center;justify-content:space-between;gap:30px;"
+        >
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2 class="section-title" style="font-size:32px;">
+              期待与优秀团队交流
+            </h2>
+            <p class="section-desc">
+              如果你正在寻找 AI、科技、编程或交叉学科方向的学生，
+              欢迎通过邮件或 GitHub 与我联系。
+            </p>
+          </div>
+
+          <div class="hero-actions" style="flex:0 0 auto;">
+            <a class="btn btn-primary" href="mailto:938731396@qq.com">
+              联系我 →
+            </a>
+            <button class="btn btn-secondary" id="copyEmailBtn2">
+              复制邮箱
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =======================================================
+       Footer
+  ======================================================== -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        © 2026 张儒翰 · Personal Resume
+      </div>
+      <div>
+        Last updated · 2026.08
+      </div>
+    </div>
+  </footer>
+
+  <button
+    class="back-top"
+    id="backTop"
+    aria-label="返回顶部"
+    title="返回顶部"
+  >
+    ↑
+  </button>
+
+  <!-- Three.js library (native <script> tag — no bundler/React needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    /* =========================================================
+       Resume Data
+       ========================================================= */
+    const resume = {
+      name: "张儒翰",
+
+      title: "同济大学｜光电信息科学与工程 & 应用物理双学位",
+
+      subtitle: "AI / 编程 / 科技方向",
+
+      contact: {
+        phone: "18884845229",
+        wechat: "13056568886",
+        email: "938731396@qq.com",
+        github: "https://github.com/Linbinran",
+        githubText: "github.com/Linbinran"
+      },
+
+      education: {
+        school: "同济大学",
+        degree: "光电信息科学与工程 & 应用物理｜双学位",
+        period: "2026 — 至今"
+      },
+
+      language: {
+        IELTS: "7.0"
+      },
+
+      certificates: [
+        "阿里云 AI 工程师高级证书",
+        "讯飞科大 AI 工程师系列证书"
+      ],
+
+      skills: {
+        ai: ["生成式 AI", "提示词设计", "AI 工作流"],
+        programming: ["Python", "C 语言", "算法基础"],
+        communication: ["PPT 制作", "Excel", "信息视觉化"],
+        science: ["应用物理", "光电信息"],
+        language: ["IELTS 7.0", "英文资料研究"]
+      },
+
+      projects: [
+        {
+          name: "AI 简历智能化工作流",
+          category: "AI / 智能化",
+          tech: ["生成式 AI", "Prompt", "Workflow"]
+        },
+        {
+          name: "MusicGuessr",
+          category: "Python & C语言 / 编程",
+          tech: ["Python", "C", "算法基础", "Console"]
+        },
+        {
+          name: "AI × 光电科技探索",
+          category: "科技 / 光电",
+          tech: ["AI", "Physics", "光电信息"]
+        }
+      ]
+    };
+
+    /* =========================================================
+       Theme
+    ========================================================= */
+    const themeBtn = document.getElementById("themeBtn");
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("resume-theme", theme);
+      themeBtn.textContent = theme === "dark" ? "☀" : "◐";
+      themeBtn.title = theme === "dark"
+        ? "切换浅色模式"
+        : "切换深色模式";
+    }
+
+    const storedTheme = localStorage.getItem("resume-theme");
+
+    if (storedTheme) {
+      applyTheme(storedTheme);
+    } else {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      applyTheme(prefersDark ? "dark" : "light");
+    }
+
+    themeBtn.addEventListener("click", () => {
+      const current =
+        document.documentElement.getAttribute("data-theme");
+
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    /* =========================================================
+       Print
+    ========================================================= */
+    document.getElementById("printBtn").addEventListener("click", () => {
+      window.print();
+    });
+
+    /* =========================================================
+       Email Copy
+    ========================================================= */
+    function copyEmail(button) {
+      const email = resume.contact.email;
+
+      navigator.clipboard
+        .writeText(email)
+        .then(() => {
+          const original = button.textContent;
+          button.textContent = "✓ 已复制";
+
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1600);
+        })
+        .catch(() => {
+          const input = document.createElement("input");
+          input.value = email;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          input.remove();
+
+          const original = button.textContent;
+          button.textContent = "✓ 已复制";
+
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1600);
+        });
+    }
+
+    document
+      .getElementById("copyEmailBtn")
+      .addEventListener("click", function () {
+        copyEmail(this);
+      });
+
+    document
+      .getElementById("copyEmailBtn2")
+      .addEventListener("click", function () {
+        copyEmail(this);
+      });
+
+    /* =========================================================
+       Tabs
+       - ARIA
+       - Keyboard Left / Right
+    ========================================================= */
+    function setupTabs() {
+      const tabGroups = {};
+
+      document.querySelectorAll(".tab").forEach(tab => {
+        const group = tab.dataset.tabGroup;
+
+        if (!tabGroups[group]) {
+          tabGroups[group] = [];
+        }
+
+        tabGroups[group].push(tab);
+
+        tab.addEventListener("click", () => {
+          activateTab(tab, tabGroups[group]);
+        });
+
+        tab.addEventListener("keydown", event => {
+          const tabs = tabGroups[group];
+          const currentIndex = tabs.indexOf(tab);
+
+          let nextIndex = null;
+
+          if (event.key === "ArrowRight") {
+            nextIndex = (currentIndex + 1) % tabs.length;
+          }
+
+          if (event.key === "ArrowLeft") {
+            nextIndex =
+              (currentIndex - 1 + tabs.length) % tabs.length;
+          }
+
+          if (nextIndex !== null) {
+            event.preventDefault();
+
+            tabs[nextIndex].focus();
+            activateTab(tabs[nextIndex], tabs);
+          }
+        });
+      });
+    }
+
+    function activateTab(tab, groupTabs) {
+      const targetId = tab.dataset.target;
+
+      groupTabs.forEach(item => {
+        item.setAttribute(
+          "aria-selected",
+          item === tab ? "true" : "false"
+        );
+      });
+
+      const groupName = tab.dataset.tabGroup;
+
+      document
+        .querySelectorAll(
+          `.tab-panel[id]`
+        )
+        .forEach(panel => {
+          const relatedTab =
+            document.querySelector(
+              `[data-target="${panel.id}"]`
+            );
+
+          if (
+            relatedTab &&
+            relatedTab.dataset.tabGroup === groupName
+          ) {
+            panel.classList.toggle(
+              "active",
+              panel.id === targetId
+            );
+          }
+        });
+    }
+
+    setupTabs();
+
+    /* =========================================================
+       Reveal on Scroll
+    ========================================================= */
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (
+      "IntersectionObserver" in window &&
+      !prefersReducedMotion
+    ) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: "0px 0px -30px 0px"
+        }
+      );
+
+      revealElements.forEach(element => {
+        observer.observe(element);
+      });
+    } else {
+      revealElements.forEach(element => {
+        element.classList.add("visible");
+      });
+    }
+
+    /* =========================================================
+       Active Navigation
+    ========================================================= */
+    const navLinks =
+      document.querySelectorAll(".nav-links a");
+
+    const sections =
+      document.querySelectorAll("main section[id]");
+
+    if ("IntersectionObserver" in window) {
+      const navObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              navLinks.forEach(link => {
+                link.classList.toggle(
+                  "active",
+                  link.getAttribute("href") ===
+                    "#" + entry.target.id
+                );
+              });
+            }
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: "-20% 0px -65% 0px"
+        }
+      );
+
+      sections.forEach(section => {
+        navObserver.observe(section);
+      });
+    }
+
+    /* =========================================================
+       Back to Top
+    ========================================================= */
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 500) {
+          backTop.classList.add("visible");
+        } else {
+          backTop.classList.remove("visible");
+        }
+      },
+      { passive: true }
+    );
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion
+          ? "auto"
+          : "smooth"
+      });
+    });
+
+
+    /* =========================================================
+       AI Certificate Gallery
+    ========================================================= */
+    const certModal = document.getElementById("certModal");
+    const viewCertificatesBtn = document.getElementById("viewCertificatesBtn");
+    const closeCertBtn = document.getElementById("closeCertBtn");
+
+    function openCertificateModal() {
+      certModal.classList.add("open");
+      certModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeCertBtn.focus();
+    }
+
+    function closeCertificateModal() {
+      certModal.classList.remove("open");
+      certModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    viewCertificatesBtn.addEventListener("click", openCertificateModal);
+    closeCertBtn.addEventListener("click", closeCertificateModal);
+
+    certModal.addEventListener("click", event => {
+      if (event.target.hasAttribute("data-close-cert")) {
+        closeCertificateModal();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && certModal.classList.contains("open")) {
+        closeCertificateModal();
+      }
+    });
+
+    /* =========================================================
+       Portfolio — MusicGuessr modal
+    ========================================================= */
+    const mgModal = document.getElementById("musicGuessrModal");
+    const musicGuessrCover = document.getElementById("musicGuessrCover");
+    const closeMgBtn = document.getElementById("closeMgBtn");
+
+    function openMgModal() {
+      mgModal.classList.add("open");
+      mgModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeMgBtn.focus();
+    }
+
+    function closeMgModal() {
+      mgModal.classList.remove("open");
+      mgModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    musicGuessrCover.addEventListener("click", openMgModal);
+    closeMgBtn.addEventListener("click", closeMgModal);
+
+    mgModal.addEventListener("click", event => {
+      if (event.target.hasAttribute("data-close-mg")) {
+        closeMgModal();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && mgModal.classList.contains("open")) {
+        closeMgModal();
+      }
+    });
+
+    /* =========================================================
+       Portfolio — PPT 横向堆叠滑动轮播
+       【图片上传位置】把下面数组里每一项的 src 换成你上传的 PPT 截图文件名，
+       需要几张就写几项（顺序即左右切换顺序）。卡片会按数组数量自动生成。
+    ========================================================= */
+    const pptImages = [
+      { src: "智慧城市.png", alt: "PPT 作品展示 1" },
+      { src: "智启新航.png", alt: "PPT 作品展示 2" },
+      { src: "台湾.png", alt: "PPT 作品展示 3" }
+    ];
+
+    let pptIndex = 0;
+    const pptTrack = document.getElementById("pptTrack");
+    const pptCards = [];
+
+    // Build one .ppt-card per image, all stacked on top of each other;
+    // their position/scale/opacity is computed purely from CSS transforms below.
+    pptImages.forEach((item, i) => {
+      const card = document.createElement("div");
+      card.className = "ppt-card";
+      card.dataset.index = String(i);
+
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt;
+      img.loading = "lazy";
+
+      card.appendChild(img);
+      pptTrack.appendChild(card);
+      pptCards.push(card);
+    });
+
+    // Shortest signed distance from `index` to `current` on a circular track,
+    // so the carousel wraps around smoothly in either direction.
+    function circularOffset(index, current, total) {
+      let diff = index - current;
+      diff = ((diff % total) + total) % total;
+      if (diff > total / 2) diff -= total;
+      return diff;
+    }
+
+    function layoutPptCards() {
+      const total = pptCards.length;
+      if (!total) return;
+
+      pptCards.forEach((card, i) => {
+        const offset = circularOffset(i, pptIndex, total);
+        const abs = Math.abs(offset);
+
+        let translateXPct = offset * 62;
+        let scale = 1;
+        let opacity = 1;
+        let blur = 0;
+        let brightness = 1;
+        let zIndex = 10 - abs;
+
+        if (abs === 1) {
+          scale = 0.82;
+          opacity = 0.55;
+          blur = 1;
+          brightness = 0.65;
+        } else if (abs >= 2) {
+          translateXPct = offset > 0 ? 100 : -100;
+          scale = 0.68;
+          opacity = 0;
+          blur = 2;
+          brightness = 0.5;
+        }
+
+        card.style.transform =
+          `translate(-50%, -50%) translateX(${translateXPct}%) scale(${scale})`;
+        card.style.opacity = String(opacity);
+        card.style.filter = `blur(${blur}px) brightness(${brightness})`;
+        card.style.zIndex = String(zIndex);
+        card.style.pointerEvents = abs === 0 ? "auto" : "none";
+      });
+    }
+
+    layoutPptCards();
+
+    document.getElementById("pptPrevBtn").addEventListener("click", () => {
+      pptIndex = (pptIndex - 1 + pptCards.length) % pptCards.length;
+      layoutPptCards();
+    });
+
+    document.getElementById("pptNextBtn").addEventListener("click", () => {
+      pptIndex = (pptIndex + 1) % pptCards.length;
+      layoutPptCards();
+    });
+
+    window.addEventListener("resize", layoutPptCards);
+
+    /* =========================================================
+       Dynamic Document Title
+    ========================================================= */
+    document.title =
+      `${resume.name} · ${resume.subtitle}`;
+
+    /* =========================================================
+       Smooth Internal Links
+    ========================================================= */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", event => {
+        const targetId =
+          link.getAttribute("href");
+
+        const target =
+          document.querySelector(targetId);
+
+        if (target) {
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: prefersReducedMotion
+              ? "auto"
+              : "smooth"
+          });
+        }
+      });
+    });
+
+    /* =========================================================
+       Three.js Particle Background (native HTML/JS)
+       - canvas: position:absolute; inset:0; z-index:-1; pointer-events:none
+       - fixed height 320px, transparent background
+       - fewer particles on mobile to avoid jank
+       - pauses when off-screen / respects reduced-motion
+    ========================================================= */
+    (function initParticleFX() {
+      const canvas = document.getElementById("fx-canvas");
+      if (!canvas || typeof THREE === "undefined") return;
+
+      const FX_HEIGHT = 320;
+      const isMobile = window.matchMedia("(max-width: 680px)").matches
+        || window.innerWidth <= 680;
+
+      // Scene / camera / renderer — transparent background
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        55,
+        Math.max(canvas.clientWidth || window.innerWidth, 1) / FX_HEIGHT,
+        0.1,
+        1000
+      );
+      camera.position.z = 70;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true
+        });
+      } catch (e) {
+        return; // WebGL unavailable — fail silently, page still works
+      }
+
+      renderer.setClearColor(0x000000, 0);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
+
+      function currentWidth() {
+        return canvas.clientWidth || canvas.parentElement.clientWidth || window.innerWidth;
+      }
+
+      renderer.setSize(currentWidth(), FX_HEIGHT, false);
+
+      // Fewer particles + no connecting lines on mobile to prevent jank
+      const particleCount = isMobile ? 40 : 170;
+      const spreadX = 150;
+      const spreadY = 70;
+      const spreadZ = 90;
+
+      const positions = new Float32Array(particleCount * 3);
+      const drift = new Float32Array(particleCount);
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * spreadX;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * spreadY;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * spreadZ;
+        drift[i] = 0.15 + Math.random() * 0.35;
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+      const material = new THREE.PointsMaterial({
+        color: 0x38bdf8,
+        size: isMobile ? 1.1 : 1.5,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true
+      });
+
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      // Connecting "network" lines — desktop only, capped pair count for perf
+      let lineMesh = null;
+      if (!isMobile) {
+        const maxDist = 16;
+        const maxPairs = 260;
+        const linePositions = [];
+        let pairs = 0;
+
+        outer:
+        for (let i = 0; i < particleCount; i++) {
+          for (let j = i + 1; j < particleCount; j++) {
+            const dx = positions[i * 3] - positions[j * 3];
+            const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+            const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+            if (dist < maxDist) {
+              linePositions.push(
+                positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
+                positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
+              );
+              pairs++;
+              if (pairs >= maxPairs) break outer;
+            }
+          }
+        }
+
+        if (linePositions.length) {
+          const lineGeo = new THREE.BufferGeometry();
+          lineGeo.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(linePositions, 3)
+          );
+          const lineMat = new THREE.LineBasicMaterial({
+            color: 0x22d3ee,
+            transparent: true,
+            opacity: 0.14
+          });
+          lineMesh = new THREE.LineSegments(lineGeo, lineMat);
+          scene.add(lineMesh);
+        }
+      }
+
+      function handleResize() {
+        const w = currentWidth();
+        camera.aspect = w / FX_HEIGHT;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, FX_HEIGHT, false);
+      }
+      window.addEventListener("resize", handleResize);
+
+      let rafId = null;
+      let running = false;
+
+      function renderStatic() {
+        renderer.render(scene, camera);
+      }
+
+      function tick() {
+        if (!running) return;
+        rafId = requestAnimationFrame(tick);
+
+        const posAttr = geometry.attributes.position;
+        const t = performance.now() * 0.0006;
+
+        for (let i = 0; i < particleCount; i++) {
+          posAttr.array[i * 3 + 1] += Math.sin(t + i) * 0.012 * drift[i];
+        }
+        posAttr.needsUpdate = true;
+
+        points.rotation.y += 0.0008;
+        if (lineMesh) lineMesh.rotation.y = points.rotation.y;
+
+        renderer.render(scene, camera);
+      }
+
+      function start() {
+        if (running || prefersReducedMotion) return;
+        running = true;
+        tick();
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
+      if (prefersReducedMotion) {
+        renderStatic();
+      } else if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                start();
+              } else {
+                stop();
+              }
+            });
+          },
+          { threshold: 0 }
+        );
+        io.observe(canvas);
+      } else {
+        start();
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stop();
+        } else if (!prefersReducedMotion) {
+          start();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
